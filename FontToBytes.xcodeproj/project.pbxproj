@@ -1,0 +1,514 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F61B6D131B93241500E5159D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D121B93241500E5159D /* AppDelegate.swift */; };
+		F61B6D151B93241500E5159D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D141B93241500E5159D /* MainViewController.swift */; };
+		F61B6D171B93241500E5159D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F61B6D161B93241500E5159D /* Images.xcassets */; };
+		F61B6D1A1B93241500E5159D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61B6D181B93241500E5159D /* Main.storyboard */; };
+		F61B6D261B93241500E5159D /* FontToBytesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D251B93241500E5159D /* FontToBytesTests.swift */; };
+		F61B6D301B932F2A00E5159D /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D2F1B932F2A00E5159D /* MainWindowController.swift */; };
+		F61B6D321B93449000E5159D /* ModeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D311B93449000E5159D /* ModeItem.swift */; };
+		F61B6D341B93AA7200E5159D /* Converter8x8Fixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */; };
+		F6590FFF1B9879B300A77DBA /* NSBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6590FFE1B9879B300A77DBA /* NSBezierPathExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		F65910011B98938C00A77DBA /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65910001B98938C00A77DBA /* StyleKit.swift */; settings = {ASSET_TAGS = (); }; };
+		F65910031B98B38500A77DBA /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65910021B98B38500A77DBA /* ResultViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F65A09A81B96462A00260BB2 /* InputImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A09A71B96462A00260BB2 /* InputImage.swift */; settings = {ASSET_TAGS = (); }; };
+		F65A09AA1B96499700260BB2 /* ByteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A09A91B96499700260BB2 /* ByteWriter.swift */; settings = {ASSET_TAGS = (); }; };
+		F65A09AC1B9649CE00260BB2 /* ModeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A09AB1B9649CE00260BB2 /* ModeConverter.swift */; settings = {ASSET_TAGS = (); }; };
+		F65A09AE1B964A1D00260BB2 /* ConverterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65A09AD1B964A1D00260BB2 /* ConverterError.swift */; settings = {ASSET_TAGS = (); }; };
+		F66377EF1B99BABE0015E531 /* SourceCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66377EE1B99BABE0015E531 /* SourceCodeGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		F66BB3141B978CFA00F92DDE /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BB3131B978CFA00F92DDE /* ErrorViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F66BB31A1B9792F800F92DDE /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BB3191B9792F800F92DDE /* ErrorView.swift */; settings = {ASSET_TAGS = (); }; };
+		F69EC3D71B97AA9C00075CFD /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EC3D61B97AA9C00075CFD /* WelcomeView.swift */; settings = {ASSET_TAGS = (); }; };
+		F69EC3D91B97AAAC00075CFD /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EC3D81B97AAAC00075CFD /* WelcomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F61B6D201B93241500E5159D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61B6D051B93241500E5159D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F61B6D0C1B93241500E5159D;
+			remoteInfo = FontToBytes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F61B6D0D1B93241500E5159D /* Font to Bytes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Font to Bytes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F61B6D111B93241500E5159D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F61B6D121B93241500E5159D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F61B6D141B93241500E5159D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F61B6D161B93241500E5159D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F61B6D191B93241500E5159D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F61B6D1F1B93241500E5159D /* FontToBytesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontToBytesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F61B6D241B93241500E5159D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F61B6D251B93241500E5159D /* FontToBytesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontToBytesTests.swift; sourceTree = "<group>"; };
+		F61B6D2F1B932F2A00E5159D /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		F61B6D311B93449000E5159D /* ModeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeItem.swift; sourceTree = "<group>"; };
+		F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter8x8Fixed.swift; sourceTree = "<group>"; };
+		F6590FFE1B9879B300A77DBA /* NSBezierPathExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBezierPathExtension.swift; sourceTree = "<group>"; };
+		F65910001B98938C00A77DBA /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		F65910021B98B38500A77DBA /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		F65A09A71B96462A00260BB2 /* InputImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputImage.swift; sourceTree = "<group>"; };
+		F65A09A91B96499700260BB2 /* ByteWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteWriter.swift; sourceTree = "<group>"; };
+		F65A09AB1B9649CE00260BB2 /* ModeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeConverter.swift; sourceTree = "<group>"; };
+		F65A09AD1B964A1D00260BB2 /* ConverterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConverterError.swift; sourceTree = "<group>"; };
+		F66377EE1B99BABE0015E531 /* SourceCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCodeGenerator.swift; sourceTree = "<group>"; };
+		F66BB3131B978CFA00F92DDE /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		F66BB3191B9792F800F92DDE /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		F696CC4B1B98E8240064ECB5 /* FontToBytes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FontToBytes.entitlements; sourceTree = "<group>"; };
+		F69EC3D61B97AA9C00075CFD /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		F69EC3D81B97AAAC00075CFD /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F61B6D0A1B93241500E5159D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F61B6D1C1B93241500E5159D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F61B6D041B93241500E5159D = {
+			isa = PBXGroup;
+			children = (
+				F61B6D0F1B93241500E5159D /* FontToBytes */,
+				F61B6D221B93241500E5159D /* FontToBytesTests */,
+				F61B6D0E1B93241500E5159D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F61B6D0E1B93241500E5159D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F61B6D0D1B93241500E5159D /* Font to Bytes.app */,
+				F61B6D1F1B93241500E5159D /* FontToBytesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F61B6D0F1B93241500E5159D /* FontToBytes */ = {
+			isa = PBXGroup;
+			children = (
+				F696CC4B1B98E8240064ECB5 /* FontToBytes.entitlements */,
+				F61B6D161B93241500E5159D /* Images.xcassets */,
+				F65A09A91B96499700260BB2 /* ByteWriter.swift */,
+				F66377EE1B99BABE0015E531 /* SourceCodeGenerator.swift */,
+				F65A09AB1B9649CE00260BB2 /* ModeConverter.swift */,
+				F65A09AD1B964A1D00260BB2 /* ConverterError.swift */,
+				F61B6D311B93449000E5159D /* ModeItem.swift */,
+				F65A09A71B96462A00260BB2 /* InputImage.swift */,
+				F65A09AF1B964A3500260BB2 /* User Interface */,
+				F65A09A61B9645A600260BB2 /* Converter */,
+				F61B6D101B93241500E5159D /* Supporting Files */,
+			);
+			path = FontToBytes;
+			sourceTree = "<group>";
+		};
+		F61B6D101B93241500E5159D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F61B6D111B93241500E5159D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F61B6D221B93241500E5159D /* FontToBytesTests */ = {
+			isa = PBXGroup;
+			children = (
+				F61B6D251B93241500E5159D /* FontToBytesTests.swift */,
+				F61B6D231B93241500E5159D /* Supporting Files */,
+			);
+			path = FontToBytesTests;
+			sourceTree = "<group>";
+		};
+		F61B6D231B93241500E5159D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F61B6D241B93241500E5159D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F65A09A61B9645A600260BB2 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */,
+			);
+			name = Converter;
+			sourceTree = "<group>";
+		};
+		F65A09AF1B964A3500260BB2 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				F65910001B98938C00A77DBA /* StyleKit.swift */,
+				F61B6D181B93241500E5159D /* Main.storyboard */,
+				F61B6D121B93241500E5159D /* AppDelegate.swift */,
+				F61B6D2F1B932F2A00E5159D /* MainWindowController.swift */,
+				F61B6D141B93241500E5159D /* MainViewController.swift */,
+				F66BB3131B978CFA00F92DDE /* ErrorViewController.swift */,
+				F66BB3191B9792F800F92DDE /* ErrorView.swift */,
+				F69EC3D61B97AA9C00075CFD /* WelcomeView.swift */,
+				F69EC3D81B97AAAC00075CFD /* WelcomeViewController.swift */,
+				F6590FFE1B9879B300A77DBA /* NSBezierPathExtension.swift */,
+				F65910021B98B38500A77DBA /* ResultViewController.swift */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F61B6D0C1B93241500E5159D /* FontToBytes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F61B6D291B93241500E5159D /* Build configuration list for PBXNativeTarget "FontToBytes" */;
+			buildPhases = (
+				F61B6D091B93241500E5159D /* Sources */,
+				F61B6D0A1B93241500E5159D /* Frameworks */,
+				F61B6D0B1B93241500E5159D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FontToBytes;
+			productName = FontToBytes;
+			productReference = F61B6D0D1B93241500E5159D /* Font to Bytes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F61B6D1E1B93241500E5159D /* FontToBytesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F61B6D2C1B93241500E5159D /* Build configuration list for PBXNativeTarget "FontToBytesTests" */;
+			buildPhases = (
+				F61B6D1B1B93241500E5159D /* Sources */,
+				F61B6D1C1B93241500E5159D /* Frameworks */,
+				F61B6D1D1B93241500E5159D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F61B6D211B93241500E5159D /* PBXTargetDependency */,
+			);
+			name = FontToBytesTests;
+			productName = FontToBytesTests;
+			productReference = F61B6D1F1B93241500E5159D /* FontToBytesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F61B6D051B93241500E5159D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Lucky Resistor";
+				TargetAttributes = {
+					F61B6D0C1B93241500E5159D = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = YMXNPP3TK2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					F61B6D1E1B93241500E5159D = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = F61B6D0C1B93241500E5159D;
+					};
+				};
+			};
+			buildConfigurationList = F61B6D081B93241500E5159D /* Build configuration list for PBXProject "FontToBytes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F61B6D041B93241500E5159D;
+			productRefGroup = F61B6D0E1B93241500E5159D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F61B6D0C1B93241500E5159D /* FontToBytes */,
+				F61B6D1E1B93241500E5159D /* FontToBytesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F61B6D0B1B93241500E5159D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F61B6D171B93241500E5159D /* Images.xcassets in Resources */,
+				F61B6D1A1B93241500E5159D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F61B6D1D1B93241500E5159D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F61B6D091B93241500E5159D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F65A09A81B96462A00260BB2 /* InputImage.swift in Sources */,
+				F65A09AE1B964A1D00260BB2 /* ConverterError.swift in Sources */,
+				F61B6D151B93241500E5159D /* MainViewController.swift in Sources */,
+				F65910031B98B38500A77DBA /* ResultViewController.swift in Sources */,
+				F65910011B98938C00A77DBA /* StyleKit.swift in Sources */,
+				F61B6D321B93449000E5159D /* ModeItem.swift in Sources */,
+				F65A09AC1B9649CE00260BB2 /* ModeConverter.swift in Sources */,
+				F61B6D131B93241500E5159D /* AppDelegate.swift in Sources */,
+				F69EC3D71B97AA9C00075CFD /* WelcomeView.swift in Sources */,
+				F66BB31A1B9792F800F92DDE /* ErrorView.swift in Sources */,
+				F6590FFF1B9879B300A77DBA /* NSBezierPathExtension.swift in Sources */,
+				F65A09AA1B96499700260BB2 /* ByteWriter.swift in Sources */,
+				F66BB3141B978CFA00F92DDE /* ErrorViewController.swift in Sources */,
+				F61B6D301B932F2A00E5159D /* MainWindowController.swift in Sources */,
+				F61B6D341B93AA7200E5159D /* Converter8x8Fixed.swift in Sources */,
+				F69EC3D91B97AAAC00075CFD /* WelcomeViewController.swift in Sources */,
+				F66377EF1B99BABE0015E531 /* SourceCodeGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F61B6D1B1B93241500E5159D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F61B6D261B93241500E5159D /* FontToBytesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F61B6D211B93241500E5159D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F61B6D0C1B93241500E5159D /* FontToBytes */;
+			targetProxy = F61B6D201B93241500E5159D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F61B6D181B93241500E5159D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F61B6D191B93241500E5159D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F61B6D271B93241500E5159D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F61B6D281B93241500E5159D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F61B6D2A1B93241500E5159D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FontToBytes/FontToBytes.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FontToBytes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.luckyresistor.FontToBytes;
+				PRODUCT_MODULE_NAME = FontToBytes;
+				PRODUCT_NAME = "Font to Bytes";
+			};
+			name = Debug;
+		};
+		F61B6D2B1B93241500E5159D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FontToBytes/FontToBytes.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FontToBytes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.luckyresistor.FontToBytes;
+				PRODUCT_MODULE_NAME = FontToBytes;
+				PRODUCT_NAME = "Font to Bytes";
+			};
+			name = Release;
+		};
+		F61B6D2D1B93241500E5159D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FontToBytesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.luckyresistor.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontToBytes.app/Contents/MacOS/FontToBytes";
+			};
+			name = Debug;
+		};
+		F61B6D2E1B93241500E5159D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FontToBytesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.luckyresistor.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FontToBytes.app/Contents/MacOS/FontToBytes";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F61B6D081B93241500E5159D /* Build configuration list for PBXProject "FontToBytes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F61B6D271B93241500E5159D /* Debug */,
+				F61B6D281B93241500E5159D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F61B6D291B93241500E5159D /* Build configuration list for PBXNativeTarget "FontToBytes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F61B6D2A1B93241500E5159D /* Debug */,
+				F61B6D2B1B93241500E5159D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F61B6D2C1B93241500E5159D /* Build configuration list for PBXNativeTarget "FontToBytesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F61B6D2D1B93241500E5159D /* Debug */,
+				F61B6D2E1B93241500E5159D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F61B6D051B93241500E5159D /* Project object */;
+}
