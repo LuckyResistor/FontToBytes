@@ -22,11 +22,31 @@
 import Foundation
 
 
-/// The bit order for the source generator
+/// Options for the source code generation.
 ///
-enum SourceGeneratorBitOrder {
-    case Normal
-    case Reverse
+struct SourceCodeOptions {
+
+    /// Flag if the bits shall be inverted.
+    ///
+    enum Inversion {
+        case None
+        case Invert
+    }
+    
+    /// The bit order for the source generator
+    ///
+    enum BitOrder {
+        case Normal
+        case Reverse
+    }
+    
+    /// If the bits shall be inverted
+    ///
+    var inversion: Inversion
+
+    /// If the bits shall be reversed
+    ///
+    var bitOrder: BitOrder
 }
 
 
@@ -40,7 +60,7 @@ protocol SourceCodeGenerator: ByteWriter {
     
     /// The generator requires a default constructor.
     ///
-    init(bitOrder: SourceGeneratorBitOrder)
+    init(options: SourceCodeOptions)
 }
 
 
@@ -52,7 +72,7 @@ protocol SourceCodeGeneratorItem {
     
     /// Create a new generator
     ///
-    func createGenerator(bitOrder: SourceGeneratorBitOrder) -> SourceCodeGenerator
+    func createGenerator(options: SourceCodeOptions) -> SourceCodeGenerator
     
 }
 
@@ -73,8 +93,8 @@ class SourceCodeGeneratorItemImpl<GeneratorType: SourceCodeGenerator>: SourceCod
     
     /// Create a new source code generator from this item.
     ///
-    func createGenerator(bitOrder: SourceGeneratorBitOrder) -> SourceCodeGenerator {
-        return GeneratorType(bitOrder: bitOrder)
+    func createGenerator(options: SourceCodeOptions) -> SourceCodeGenerator {
+        return GeneratorType(options: options)
     }
     
 }
@@ -88,14 +108,14 @@ class CommonSourceGenerator: SourceCodeGenerator {
     ///
     var sourceCode: String = ""
     
-    /// The used bit order.
+    /// The source code options.
     ///
-    private let bitOrder: SourceGeneratorBitOrder
+    private let options: SourceCodeOptions
     
     /// Create a new generator instance.
     ///
-    required init(bitOrder: SourceGeneratorBitOrder) {
-        self.bitOrder = bitOrder
+    required init(options: SourceCodeOptions) {
+        self.options = options
     }
     
     func begin() {
@@ -110,8 +130,8 @@ class CommonSourceGenerator: SourceCodeGenerator {
         sourceCode += "\n\nconst unsigned char \(name)[] = {\n\t"
     }
     
-    final func writeByte(byte: UInt8) {
-        if bitOrder == .Reverse {
+    final func writeByte(var byte: UInt8) {
+        if options.bitOrder == .Reverse {
             var reversedByte: UInt8 = 0
             for i: UInt8 in 0...7 {
                 if (byte & (1<<i)) != 0 {
@@ -119,10 +139,12 @@ class CommonSourceGenerator: SourceCodeGenerator {
                     reversedByte |= setBit
                 }
             }
-            writeFinalByte(reversedByte)
-        } else {
-            writeFinalByte(byte)
+            byte = reversedByte;
         }
+        if options.inversion == .Invert {
+            byte = ~byte
+        }
+        writeFinalByte(byte)
     }
     
     func writeFinalByte(byte: UInt8) {

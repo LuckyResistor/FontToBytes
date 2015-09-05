@@ -64,8 +64,7 @@ class Converter8x8Fixed: ModeConverter {
     }
     
     
-    func convertImage(inputImage: InputImage, byteWriter: ByteWriter) throws {
-        
+    private func checkImage(inputImage: InputImage) throws {
         guard inputImage.height >= 8 else {
             throw ConverterError(summary: "Image Too Small", details: "The height of the image has to be minimum 8 pixel.")
         }
@@ -81,6 +80,10 @@ class Converter8x8Fixed: ModeConverter {
         guard inputImage.width <= 2048 && inputImage.height <= 2048 else {
             throw ConverterError(summary: "Image Too Large", details: "The no image dimension must be greater than 2048.")
         }
+    }
+    
+    func convertImage(inputImage: InputImage, byteWriter: ByteWriter) throws {
+        try checkImage(inputImage);
         
         byteWriter.begin()
         byteWriter.beginArray("font")
@@ -111,7 +114,36 @@ class Converter8x8Fixed: ModeConverter {
         byteWriter.endArray()
         byteWriter.end()
     }
-    
+ 
+    func createCharacterImages(inputImage: InputImage) throws -> [UnicodeScalar: NSImage] {
+        try checkImage(inputImage);
+        
+        var result = [UnicodeScalar: NSImage]()
+        var characterIndex = 0
+        for cy in 0..<(inputImage.height/8) {
+            for cx in 0..<(inputImage.width/8) {
+                let pixelSize = 64
+                let characterImage = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 8*pixelSize, pixelsHigh: 8*pixelSize, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSCalibratedRGBColorSpace, bytesPerRow: 0, bitsPerPixel: 0)!
+                let gc = NSGraphicsContext(bitmapImageRep: characterImage)!
+                let context = gc.CGContext
+                CGContextSetFillColorWithColor(context, NSColor.whiteColor().CGColor)
+                CGContextFillRect(context, NSRect(x: 0.0, y: 0.0, width: 8.0*CGFloat(pixelSize), height: 8.0*CGFloat(pixelSize)))
+                CGContextSetFillColorWithColor(context, NSColor.blackColor().CGColor)
+                for y in 0...7 {
+                    for x in 0...7 {
+                        if inputImage.isPixelSet(x: cx*8+x, y: cy*8+y) {
+                            CGContextFillRect(context, NSRect(x: x*pixelSize, y: (7-y)*pixelSize, width: pixelSize, height: pixelSize))
+                        }
+                    }
+                }
+                let image = NSImage(size: NSSize(width: 8.0*CGFloat(pixelSize), height: 8.0*CGFloat(pixelSize)))
+                image.addRepresentation(characterImage)
+                result[UnicodeScalar(characterIndex+0x20)] = image
+                characterIndex++
+            }
+        }
+        return result;
+    }
 }
 
 

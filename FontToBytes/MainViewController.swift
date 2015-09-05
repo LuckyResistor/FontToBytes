@@ -24,6 +24,7 @@ import Cocoa
 
 let UD_SelectedModeIndex = "selectedModeIndex"
 let UD_SelectedOutputIndex = "selectedOutputIndex"
+let UD_InvertBitsChecked = "invertBitsChecked"
 let UD_ReverseBitsChecked = "reverseBitsChecked"
 
 
@@ -52,7 +53,10 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// The main view.
     @IBOutlet weak var mainView: NSView!
     
-    /// Check reverse bits checkbox
+    /// Invert bits checkbox
+    @IBOutlet weak var invertBitsCheckbox: NSButton!
+    
+    /// Reverse bits checkbox
     @IBOutlet weak var reverseBitsCheckbox: NSButton!
     
     /// The selection for the output format.
@@ -74,6 +78,9 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// The current code which is displayed
     var code = ""
     
+    /// The least used input image for a later print operation
+    var inputImage: InputImage? = nil
+    
     
     /// Initialize the view after load.
     ///
@@ -92,9 +99,13 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
             self.navigation.selectRowIndexes(NSIndexSet(index: selectedModeIndex+1), byExtendingSelection: false)
         }
 
+        // Check the invert bits checkbox.
+        let invertBitsChecked = ud.boolForKey(UD_InvertBitsChecked)
+        self.invertBitsCheckbox.state = (invertBitsChecked ? NSOnState : NSOffState)
+        
         // Check the flip bits checkbox.
-        let bitFlipChecked = ud.boolForKey(UD_ReverseBitsChecked)
-        self.reverseBitsCheckbox.state = (bitFlipChecked ? NSOnState : NSOffState)
+        let reverseBitsChecked = ud.boolForKey(UD_ReverseBitsChecked)
+        self.reverseBitsCheckbox.state = (reverseBitsChecked ? NSOnState : NSOffState)
         
         // Prepare the popup button with the outputs
         self.outputFormatSelection.removeAllItems()
@@ -113,6 +124,7 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         // Store the user defaults
         let ud = NSUserDefaults.standardUserDefaults()
         ud.setInteger(self.navigation.selectedRow-1, forKey: UD_SelectedModeIndex)
+        ud.setBool(self.invertBitsCheckbox.state == NSOnState, forKey: UD_InvertBitsChecked)
         ud.setBool(self.reverseBitsCheckbox.state == NSOnState, forKey: UD_ReverseBitsChecked)
         ud.setInteger(self.outputFormatSelection.indexOfSelectedItem, forKey: UD_SelectedOutputIndex)
     }
@@ -170,16 +182,21 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     }
     
     
+    /// Enable all valid menu items.
+    ///
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         if menuItem.action == Selector("saveDocumentAs:") {
             return displayedView == .Result
         } else if menuItem.action == Selector("openDocument:") {
             return displayedView == .Welcome
+        } else if menuItem.action == Selector("printDocument:") {
+            return displayedView == .Result
         } else {
             return true
         }
     }
     
+
     /// Displays the welcome view
     ///
     func displayWelcomeView() {
@@ -243,11 +260,16 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
                 do {
                     // Get the image object for the converter.
                     let inputImage = try InputImageFromNSImage(image: image)
+                    // Store a copy for later print of a character map
+                    self.inputImage = inputImage
                     // Get the byte writer for the output.
                     let selectedOutputIndex = self.outputFormatSelection.indexOfSelectedItem
                     let sourceCodeGeneratorItem = self.sourceCodeGenerators[selectedOutputIndex]
-                    let sourceCodeGenerator = sourceCodeGeneratorItem.createGenerator(
-                        self.reverseBitsCheckbox.state == NSOnState ? .Reverse : .Normal)
+                    let sourceCodeOptions = SourceCodeOptions(
+                        inversion: self.invertBitsCheckbox.state == NSOnState ? .Invert : .None,
+                        bitOrder: self.reverseBitsCheckbox.state == NSOnState ? .Reverse : .Normal)
+                    let sourceCodeGenerator = sourceCodeGeneratorItem.createGenerator(sourceCodeOptions)
+                    
                     // Get the selected mode item.
                     if let modeItem = self.navigation.itemAtRow(self.navigation.selectedRow) as? ModeItem {
                         // Start the selected converter
@@ -287,6 +309,31 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         })
     }
 
+    
+    /// Create a character map to print or as PDF
+    ///
+    @IBAction func printDocument(sender: AnyObject) {
+        // Run this things in another thread.
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+            do {
+                guard let modeItem = self.navigation.itemAtRow(self.navigation.selectedRow) as? ModeItem else {
+                    return
+                }
+                // Start the selected converter
+                let converter = modeItem.converter!
+                let characterMap = try converter.createCharacterImages(self.inputImage!)
+                // Start the print from the main queue
+                dispatch_async(dispatch_get_main_queue(), {
+                    let printView = PrintView(characterMap: characterMap)
+                    let printOperation = NSPrintOperation(view: printView)
+                    printOperation.runOperation()
+                })
+            } catch {
+                // ignore any problems.
+            }
+        })
+    }
+    
 
     // Implement NSOutlineViewDataSource and NSOutlineViewDelegate
     

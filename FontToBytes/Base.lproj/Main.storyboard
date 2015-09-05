@@ -67,6 +67,12 @@
                                                 <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="1g7-UW-pbF"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="oRx-hm-dLg"/>
+                                        <menuItem title="Print Character Map..." keyEquivalent="p" id="kn2-CE-cY9">
+                                            <connections>
+                                                <action selector="printDocument:" target="Ady-hI-5gd" id="dk9-ge-45Q"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -218,20 +224,14 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                     </button>
-                                                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JP9-rP-Yy9">
-                                                        <rect key="frame" x="0.0" y="63" width="209" height="5"/>
-                                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <font key="titleFont" metaFont="system"/>
-                                                    </box>
-                                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE8-9C-60F">
-                                                        <rect key="frame" x="0.0" y="66" width="209" height="374"/>
+                                                    <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE8-9C-60F">
+                                                        <rect key="frame" x="0.0" y="151" width="209" height="289"/>
                                                         <clipView key="contentView" drawsBackground="NO" id="eMU-54-D17">
-                                                            <rect key="frame" x="0.0" y="0.0" width="209" height="374"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="209" height="289"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" outlineTableColumn="Mbp-2d-VQz" id="oCo-me-76g">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="289"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="0.0"/>
                                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -316,19 +316,35 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="IJC-YK-6OJ">
+                                                        <rect key="frame" x="12" y="61" width="185" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Invert Bits" bezelStyle="regularSquare" imagePosition="left" inset="2" id="4FJ-PA-bds">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                    </button>
+                                                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JP9-rP-Yy9">
+                                                        <rect key="frame" x="0.0" y="83" width="209" height="5"/>
+                                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <font key="titleFont" metaFont="system"/>
+                                                    </box>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="zsV-kh-hxk" firstAttribute="top" secondItem="DYY-ft-96j" secondAttribute="top" constant="32" id="0Om-Oi-yM9"/>
                                                     <constraint firstItem="rtW-3a-HMv" firstAttribute="leading" secondItem="DYY-ft-96j" secondAttribute="leading" constant="14" id="194-NO-ScK"/>
+                                                    <constraint firstItem="IJC-YK-6OJ" firstAttribute="top" secondItem="JP9-rP-Yy9" secondAttribute="bottom" constant="8" symbolic="YES" id="1po-mR-deu"/>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="3Aq-3G-rbW"/>
                                                     <constraint firstAttribute="trailing" secondItem="zsV-kh-hxk" secondAttribute="trailing" constant="8" id="3Qs-N2-COm"/>
-                                                    <constraint firstItem="jQR-Ir-LmR" firstAttribute="top" secondItem="JP9-rP-Yy9" secondAttribute="bottom" constant="8" id="53v-QE-j3M"/>
                                                     <constraint firstItem="eE8-9C-60F" firstAttribute="leading" secondItem="DYY-ft-96j" secondAttribute="leading" id="Eai-sZ-dS1"/>
                                                     <constraint firstItem="jQR-Ir-LmR" firstAttribute="trailing" secondItem="rtW-3a-HMv" secondAttribute="trailing" id="FHk-aB-oNa"/>
                                                     <constraint firstItem="JP9-rP-Yy9" firstAttribute="top" secondItem="eE8-9C-60F" secondAttribute="bottom" id="MoC-lf-W2M"/>
+                                                    <constraint firstItem="IJC-YK-6OJ" firstAttribute="leading" secondItem="jQR-Ir-LmR" secondAttribute="leading" id="QRK-dV-Orq"/>
                                                     <constraint firstItem="eE8-9C-60F" firstAttribute="top" secondItem="zsV-kh-hxk" secondAttribute="bottom" constant="8" symbolic="YES" id="RfZ-fq-NPi"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="Z91-1U-dhO"/>
+                                                    <constraint firstItem="jQR-Ir-LmR" firstAttribute="top" secondItem="IJC-YK-6OJ" secondAttribute="bottom" constant="6" id="bc4-7d-QOm"/>
                                                     <constraint firstAttribute="trailing" secondItem="JP9-rP-Yy9" secondAttribute="trailing" id="cXa-cw-vGD"/>
+                                                    <constraint firstItem="IJC-YK-6OJ" firstAttribute="trailing" secondItem="jQR-Ir-LmR" secondAttribute="trailing" id="dW0-GC-xtO"/>
                                                     <constraint firstItem="rtW-3a-HMv" firstAttribute="top" secondItem="jQR-Ir-LmR" secondAttribute="bottom" constant="8" id="esT-J4-yei"/>
                                                     <constraint firstAttribute="bottom" secondItem="rtW-3a-HMv" secondAttribute="bottom" constant="14" id="fAC-kN-hNR"/>
                                                     <constraint firstAttribute="trailing" secondItem="rtW-3a-HMv" secondAttribute="trailing" constant="14" id="gaH-hS-lmL"/>
@@ -365,6 +381,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="invertBitsCheckbox" destination="IJC-YK-6OJ" id="MOC-x5-cBB"/>
                         <outlet property="mainView" destination="ISi-CU-d6l" id="qnt-Mc-Lxi"/>
                         <outlet property="navigation" destination="oCo-me-76g" id="Ezr-UU-YMW"/>
                         <outlet property="outputFormatSelection" destination="rtW-3a-HMv" id="efu-61-Afj"/>
@@ -507,6 +524,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Z95-hZ-xpA">
+                                <rect key="frame" x="0.0" y="60" width="644" height="5"/>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <font key="titleFont" metaFont="system"/>
+                            </box>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="f09-oO-gBu">
                                 <rect key="frame" x="0.0" y="0.0" width="644" height="61"/>
                                 <subviews>
@@ -521,8 +544,8 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jgf-GY-cKY">
-                                        <rect key="frame" x="375" y="13" width="153" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Copy to Clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o0B-JM-0ED">
+                                        <rect key="frame" x="455" y="13" width="73" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o0B-JM-0ED">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <connections>
@@ -540,24 +563,30 @@
                                             <action selector="goBack:" target="26d-XZ-rDo" id="CL8-zD-cWY"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRr-J9-GGa">
+                                        <rect key="frame" x="278" y="13" width="177" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Print Character Map..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oG4-ie-D8n">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="printDocument:" target="26d-XZ-rDo" id="9Y5-Oi-7c3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Jgf-GY-cKY" firstAttribute="bottom" secondItem="pTB-Y4-YyN" secondAttribute="bottom" id="2ae-qT-fn2"/>
                                     <constraint firstAttribute="bottom" secondItem="pTB-Y4-YyN" secondAttribute="bottom" constant="20" symbolic="YES" id="4kQ-fo-DbR"/>
                                     <constraint firstItem="pTB-Y4-YyN" firstAttribute="leading" secondItem="Jgf-GY-cKY" secondAttribute="trailing" constant="12" symbolic="YES" id="6E2-Yh-jgY"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jgf-GY-cKY" secondAttribute="bottom" constant="20" symbolic="YES" id="CyX-F3-Xks"/>
+                                    <constraint firstItem="jRr-J9-GGa" firstAttribute="bottom" secondItem="Jgf-GY-cKY" secondAttribute="bottom" id="HQC-RB-KQ6"/>
+                                    <constraint firstItem="Jgf-GY-cKY" firstAttribute="leading" secondItem="jRr-J9-GGa" secondAttribute="trailing" constant="12" symbolic="YES" id="N64-aN-WqR"/>
                                     <constraint firstAttribute="bottom" secondItem="tP0-Xq-Jak" secondAttribute="bottom" constant="20" symbolic="YES" id="N9N-uj-8qF"/>
-                                    <constraint firstItem="Jgf-GY-cKY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tP0-Xq-Jak" secondAttribute="trailing" constant="12" symbolic="YES" id="SRp-2f-DCt"/>
                                     <constraint firstAttribute="trailing" secondItem="pTB-Y4-YyN" secondAttribute="trailing" constant="20" symbolic="YES" id="aYD-5c-iZZ"/>
                                     <constraint firstItem="tP0-Xq-Jak" firstAttribute="leading" secondItem="f09-oO-gBu" secondAttribute="leading" constant="20" symbolic="YES" id="gqe-cy-JBv"/>
+                                    <constraint firstItem="jRr-J9-GGa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tP0-Xq-Jak" secondAttribute="trailing" constant="12" symbolic="YES" id="rJX-Aw-Icv"/>
                                     <constraint firstItem="pTB-Y4-YyN" firstAttribute="top" secondItem="f09-oO-gBu" secondAttribute="top" constant="20" symbolic="YES" id="zGc-j8-Tb9"/>
                                 </constraints>
                             </customView>
-                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Z95-hZ-xpA">
-                                <rect key="frame" x="0.0" y="60" width="644" height="5"/>
-                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <font key="titleFont" metaFont="system"/>
-                            </box>
                         </subviews>
                         <constraints>
                             <constraint firstItem="f09-oO-gBu" firstAttribute="leading" secondItem="2yp-R6-DSH" secondAttribute="leading" id="37Y-dN-8dB"/>

@@ -19,7 +19,7 @@
 //
 
 
-import Foundation
+import Cocoa
 
 
 /// A converter for a given mode.
@@ -35,5 +35,11 @@ protocol ModeConverter {
     ///
     func convertImage(inputImage: InputImage, byteWriter: ByteWriter) throws -> Void
     
+    /// Create a character map from the input image.
+    ///
+    /// - parameter inputImage: The input image to use for the character images.
+    /// - returns: A map with all characters to create a chart.
+    ///
+    func createCharacterImages(inputImage: InputImage) throws -> [UnicodeScalar: NSImage]
 }
 
