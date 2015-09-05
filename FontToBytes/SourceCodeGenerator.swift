@@ -161,7 +161,7 @@ class ArduinoSourceGenerator: CommonSourceGenerator {
     }
     
     override func beginArray(name: String) {
-        sourceCode += "\n\nconst uint_8 \(name)[] PROGMEM = {\n\t"
+        sourceCode += "\n\nconst uint8_t \(name)[] PROGMEM = {\n\t"
     }
 }
 
