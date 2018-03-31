@@ -12,11 +12,11 @@
 
 import Cocoa
 
-public class StyleKit : NSObject {
+open class StyleKit : NSObject {
 
     //// Cache
 
-    private struct Cache {
+    fileprivate struct Cache {
         static let lRLightOrange: NSColor = NSColor(calibratedRed: 0.855, green: 0.667, blue: 0.443, alpha: 1)
         static let lROrange: NSColor = NSColor(calibratedRed: 0.761, green: 0.443, blue: 0.071, alpha: 1)
         static let lRBrown: NSColor = NSColor(calibratedRed: 0.569, green: 0.333, blue: 0.051, alpha: 1)
@@ -32,36 +32,36 @@ public class StyleKit : NSObject {
 
     //// Colors
 
-    public class var lRLightOrange: NSColor { return Cache.lRLightOrange }
-    public class var lROrange: NSColor { return Cache.lROrange }
-    public class var lRBrown: NSColor { return Cache.lRBrown }
-    public class var lRBlue: NSColor { return Cache.lRBlue }
-    public class var lRWhite: NSColor { return Cache.lRWhite }
-    public class var lRGray1: NSColor { return Cache.lRGray1 }
-    public class var lRGray2: NSColor { return Cache.lRGray2 }
-    public class var lRGray3: NSColor { return Cache.lRGray3 }
-    public class var lRGray4: NSColor { return Cache.lRGray4 }
-    public class var lRBlack: NSColor { return Cache.lRBlack }
+    open class var lRLightOrange: NSColor { return Cache.lRLightOrange }
+    open class var lROrange: NSColor { return Cache.lROrange }
+    open class var lRBrown: NSColor { return Cache.lRBrown }
+    open class var lRBlue: NSColor { return Cache.lRBlue }
+    open class var lRWhite: NSColor { return Cache.lRWhite }
+    open class var lRGray1: NSColor { return Cache.lRGray1 }
+    open class var lRGray2: NSColor { return Cache.lRGray2 }
+    open class var lRGray3: NSColor { return Cache.lRGray3 }
+    open class var lRGray4: NSColor { return Cache.lRGray4 }
+    open class var lRBlack: NSColor { return Cache.lRBlack }
 
     //// Drawing Methods
 
-    public class func drawWarningSign() {
+    open class func drawWarningSign() {
 
         //// Shadow Declarations
         let defaultShadow = NSShadow()
-        defaultShadow.shadowColor = NSColor.blackColor()
+        defaultShadow.shadowColor = NSColor.black
         defaultShadow.shadowOffset = NSMakeSize(0.1, -4.1)
         defaultShadow.shadowBlurRadius = 5
 
         //// Bezier Drawing
         let bezierPath = NSBezierPath()
-        bezierPath.moveToPoint(NSMakePoint(12.5, 17.39))
-        bezierPath.curveToPoint(NSMakePoint(64, 112), controlPoint1: NSMakePoint(13.51, 18.26), controlPoint2: NSMakePoint(64, 112))
-        bezierPath.lineToPoint(NSMakePoint(116, 17))
-        bezierPath.curveToPoint(NSMakePoint(12.5, 17.39), controlPoint1: NSMakePoint(116, 17), controlPoint2: NSMakePoint(11.49, 16.52))
-        bezierPath.closePath()
-        bezierPath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
-        bezierPath.lineJoinStyle = NSLineJoinStyle.RoundLineJoinStyle
+        bezierPath.move(to: NSMakePoint(12.5, 17.39))
+        bezierPath.curve(to: NSMakePoint(64, 112), controlPoint1: NSMakePoint(13.51, 18.26), controlPoint2: NSMakePoint(64, 112))
+        bezierPath.line(to: NSMakePoint(116, 17))
+        bezierPath.curve(to: NSMakePoint(12.5, 17.39), controlPoint1: NSMakePoint(116, 17), controlPoint2: NSMakePoint(11.49, 16.52))
+        bezierPath.close()
+        bezierPath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+        bezierPath.lineJoinStyle = NSLineJoinStyle.roundLineJoinStyle
         NSGraphicsContext.saveGraphicsState()
         defaultShadow.set()
         StyleKit.lRLightOrange.setFill()
@@ -75,37 +75,37 @@ public class StyleKit : NSObject {
 
         //// Text Drawing
         let textPath = NSBezierPath()
-        textPath.moveToPoint(NSMakePoint(68.55, 73.67))
-        textPath.lineToPoint(NSMakePoint(67.18, 48.32))
-        textPath.curveToPoint(NSMakePoint(66.25, 46.19), controlPoint1: NSMakePoint(67.16, 47.46), controlPoint2: NSMakePoint(66.85, 46.75))
-        textPath.curveToPoint(NSMakePoint(63.98, 45.35), controlPoint1: NSMakePoint(65.65, 45.63), controlPoint2: NSMakePoint(64.89, 45.35))
-        textPath.curveToPoint(NSMakePoint(61.75, 46.19), controlPoint1: NSMakePoint(63.1, 45.35), controlPoint2: NSMakePoint(62.35, 45.63))
-        textPath.curveToPoint(NSMakePoint(60.78, 48.32), controlPoint1: NSMakePoint(61.15, 46.75), controlPoint2: NSMakePoint(60.83, 47.46))
-        textPath.lineToPoint(NSMakePoint(59.45, 73.67))
-        textPath.lineToPoint(NSMakePoint(59.45, 74.06))
-        textPath.curveToPoint(NSMakePoint(60.66, 77.64), controlPoint1: NSMakePoint(59.45, 75.57), controlPoint2: NSMakePoint(59.85, 76.76))
-        textPath.curveToPoint(NSMakePoint(63.98, 78.95), controlPoint1: NSMakePoint(61.47, 78.51), controlPoint2: NSMakePoint(62.57, 78.95))
-        textPath.curveToPoint(NSMakePoint(67.34, 77.64), controlPoint1: NSMakePoint(65.41, 78.95), controlPoint2: NSMakePoint(66.53, 78.51))
-        textPath.curveToPoint(NSMakePoint(68.55, 74.06), controlPoint1: NSMakePoint(68.15, 76.76), controlPoint2: NSMakePoint(68.55, 75.57))
-        textPath.lineToPoint(NSMakePoint(68.55, 73.67))
-        textPath.closePath()
-        textPath.moveToPoint(NSMakePoint(56.71, 35.35))
-        textPath.curveToPoint(NSMakePoint(58.73, 39.8), controlPoint1: NSMakePoint(56.71, 37.17), controlPoint2: NSMakePoint(57.39, 38.66))
-        textPath.curveToPoint(NSMakePoint(63.98, 41.52), controlPoint1: NSMakePoint(60.07, 40.95), controlPoint2: NSMakePoint(61.82, 41.52))
-        textPath.curveToPoint(NSMakePoint(69.27, 39.8), controlPoint1: NSMakePoint(66.17, 41.52), controlPoint2: NSMakePoint(67.93, 40.95))
-        textPath.curveToPoint(NSMakePoint(71.29, 35.35), controlPoint1: NSMakePoint(70.61, 38.66), controlPoint2: NSMakePoint(71.29, 37.17))
-        textPath.curveToPoint(NSMakePoint(69.27, 30.84), controlPoint1: NSMakePoint(71.29, 33.5), controlPoint2: NSMakePoint(70.61, 32))
-        textPath.curveToPoint(NSMakePoint(63.98, 29.1), controlPoint1: NSMakePoint(67.93, 29.68), controlPoint2: NSMakePoint(66.17, 29.1))
-        textPath.curveToPoint(NSMakePoint(58.73, 30.86), controlPoint1: NSMakePoint(61.82, 29.1), controlPoint2: NSMakePoint(60.07, 29.69))
-        textPath.curveToPoint(NSMakePoint(56.71, 35.35), controlPoint1: NSMakePoint(57.39, 32.03), controlPoint2: NSMakePoint(56.71, 33.53))
-        textPath.closePath()
+        textPath.move(to: NSMakePoint(68.55, 73.67))
+        textPath.line(to: NSMakePoint(67.18, 48.32))
+        textPath.curve(to: NSMakePoint(66.25, 46.19), controlPoint1: NSMakePoint(67.16, 47.46), controlPoint2: NSMakePoint(66.85, 46.75))
+        textPath.curve(to: NSMakePoint(63.98, 45.35), controlPoint1: NSMakePoint(65.65, 45.63), controlPoint2: NSMakePoint(64.89, 45.35))
+        textPath.curve(to: NSMakePoint(61.75, 46.19), controlPoint1: NSMakePoint(63.1, 45.35), controlPoint2: NSMakePoint(62.35, 45.63))
+        textPath.curve(to: NSMakePoint(60.78, 48.32), controlPoint1: NSMakePoint(61.15, 46.75), controlPoint2: NSMakePoint(60.83, 47.46))
+        textPath.line(to: NSMakePoint(59.45, 73.67))
+        textPath.line(to: NSMakePoint(59.45, 74.06))
+        textPath.curve(to: NSMakePoint(60.66, 77.64), controlPoint1: NSMakePoint(59.45, 75.57), controlPoint2: NSMakePoint(59.85, 76.76))
+        textPath.curve(to: NSMakePoint(63.98, 78.95), controlPoint1: NSMakePoint(61.47, 78.51), controlPoint2: NSMakePoint(62.57, 78.95))
+        textPath.curve(to: NSMakePoint(67.34, 77.64), controlPoint1: NSMakePoint(65.41, 78.95), controlPoint2: NSMakePoint(66.53, 78.51))
+        textPath.curve(to: NSMakePoint(68.55, 74.06), controlPoint1: NSMakePoint(68.15, 76.76), controlPoint2: NSMakePoint(68.55, 75.57))
+        textPath.line(to: NSMakePoint(68.55, 73.67))
+        textPath.close()
+        textPath.move(to: NSMakePoint(56.71, 35.35))
+        textPath.curve(to: NSMakePoint(58.73, 39.8), controlPoint1: NSMakePoint(56.71, 37.17), controlPoint2: NSMakePoint(57.39, 38.66))
+        textPath.curve(to: NSMakePoint(63.98, 41.52), controlPoint1: NSMakePoint(60.07, 40.95), controlPoint2: NSMakePoint(61.82, 41.52))
+        textPath.curve(to: NSMakePoint(69.27, 39.8), controlPoint1: NSMakePoint(66.17, 41.52), controlPoint2: NSMakePoint(67.93, 40.95))
+        textPath.curve(to: NSMakePoint(71.29, 35.35), controlPoint1: NSMakePoint(70.61, 38.66), controlPoint2: NSMakePoint(71.29, 37.17))
+        textPath.curve(to: NSMakePoint(69.27, 30.84), controlPoint1: NSMakePoint(71.29, 33.5), controlPoint2: NSMakePoint(70.61, 32))
+        textPath.curve(to: NSMakePoint(63.98, 29.1), controlPoint1: NSMakePoint(67.93, 29.68), controlPoint2: NSMakePoint(66.17, 29.1))
+        textPath.curve(to: NSMakePoint(58.73, 30.86), controlPoint1: NSMakePoint(61.82, 29.1), controlPoint2: NSMakePoint(60.07, 29.69))
+        textPath.curve(to: NSMakePoint(56.71, 35.35), controlPoint1: NSMakePoint(57.39, 32.03), controlPoint2: NSMakePoint(56.71, 33.53))
+        textPath.close()
         StyleKit.lRWhite.setFill()
         textPath.fill()
     }
 
     //// Generated Images
 
-    public class var imageOfWarningSign: NSImage {
+    open class var imageOfWarningSign: NSImage {
         if Cache.imageOfWarningSign != nil {
             return Cache.imageOfWarningSign!
         }

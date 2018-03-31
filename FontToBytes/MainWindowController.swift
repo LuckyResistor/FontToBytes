@@ -32,9 +32,9 @@ class MainWindowController: NSWindowController {
         super.windowDidLoad()
         
         // Set the required visual style.
-        self.window!.titleVisibility = NSWindowTitleVisibility.Hidden;
+        self.window!.titleVisibility = NSWindowTitleVisibility.hidden;
         self.window!.titlebarAppearsTransparent = true;
-        self.window!.movableByWindowBackground = true;
+        self.window!.isMovableByWindowBackground = true;
         
         // Register the controller in the app delegate
         let appDelegate = NSApp.delegate as! AppDelegate
@@ -43,7 +43,7 @@ class MainWindowController: NSWindowController {
 
     /// Redirect to the website for help.
     ///
-    @IBAction func showHelp(sender: AnyObject) {
-        NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://luckyresistor.me")!)
+    @IBAction func showHelp(_ sender: Any) {
+        NSWorkspace.shared().open(URL(string: "http://luckyresistor.me")!)
     }
 }

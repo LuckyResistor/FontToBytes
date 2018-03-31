@@ -37,15 +37,15 @@ protocol ByteWriter {
     /// - parameters:
     ///   - name: The name of the array.
     ///
-    func beginArray(name: String)
+    func beginArray(_ name: String)
     
     /// Write a single byte to the output array.
     ///
-    func writeByte(byte: UInt8)
+    func writeByte(_ byte: UInt8)
     
     /// Add a comment and linebrak to the output.
     ///
-    func addComment(comment: String)
+    func addComment(_ comment: String)
     
     /// Add just a linebreak to the output.
     ///
