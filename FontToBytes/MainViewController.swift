@@ -253,6 +253,11 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     ///
     func convertImage(_ url: URL) {
         // Run this things in another thread.
+        let selectedOutputIndex = outputFormatSelection.indexOfSelectedItem
+        let shouldInvertBits = invertBitsCheckbox.state == .on
+        let shouldReverseBits = reverseBitsCheckbox.state == .on
+        let selectedModeItem = navigation.item(atRow: navigation.selectedRow) as? ModeItem
+
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
             
             // Try to open the file as NSImage.
@@ -263,15 +268,14 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
                     // Store a copy for later print of a character map
                     self.inputImage = inputImage
                     // Get the byte writer for the output.
-                    let selectedOutputIndex = self.outputFormatSelection.indexOfSelectedItem
                     let sourceCodeGeneratorItem = self.sourceCodeGenerators[selectedOutputIndex]
                     let sourceCodeOptions = SourceCodeOptions(
-                        inversion: self.invertBitsCheckbox.state == .on ? .invert : .none,
-                        bitOrder: self.reverseBitsCheckbox.state == .on ? .reverse : .normal)
+                        inversion: shouldInvertBits ? .invert : .none,
+                        bitOrder: shouldReverseBits ? .reverse : .normal)
                     let sourceCodeGenerator = sourceCodeGeneratorItem.createGenerator(sourceCodeOptions)
                     
                     // Get the selected mode item.
-                    if let modeItem = self.navigation.item(atRow: self.navigation.selectedRow) as? ModeItem {
+                    if let modeItem = selectedModeItem {
                         // Start the selected converter
                         let converter = modeItem.converter!
                         try converter.convertImage(inputImage, byteWriter: sourceCodeGenerator)
@@ -313,12 +317,12 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// Create a character map to print or as PDF
     ///
     @IBAction func printDocument(_ sender: Any) {
+        guard let modeItem = self.navigation.item(atRow: self.navigation.selectedRow) as? ModeItem else {
+            return
+        }
         // Run this things in another thread.
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: {
             do {
-                guard let modeItem = self.navigation.item(atRow: self.navigation.selectedRow) as? ModeItem else {
-                    return
-                }
                 // Start the selected converter
                 let converter = modeItem.converter!
                 let characterMap = try converter.createCharacterImages(self.inputImage!)
