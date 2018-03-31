@@ -123,7 +123,7 @@ class Converter8x8Fixed: ModeConverter {
         for cy in 0..<(inputImage.height/8) {
             for cx in 0..<(inputImage.width/8) {
                 let pixelSize = 64
-                let characterImage = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 8*pixelSize, pixelsHigh: 8*pixelSize, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSCalibratedRGBColorSpace, bytesPerRow: 0, bitsPerPixel: 0)!
+                let characterImage = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 8*pixelSize, pixelsHigh: 8*pixelSize, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSColorSpaceName.calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0)!
                 let gc = NSGraphicsContext(bitmapImageRep: characterImage)!
                 let context = gc.cgContext
                 context.setFillColor(NSColor.white.cgColor)

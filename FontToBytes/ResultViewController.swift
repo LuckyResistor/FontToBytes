@@ -39,7 +39,7 @@ class ResultViewController: NSViewController {
         if font == nil {
             font = NSFont.systemFont(ofSize: 12.0)
         }
-        let attributes: [String: Any] = [NSFontAttributeName: font!]
+        let attributes: [NSAttributedStringKey: Any] = [.font: font!]
         let text = NSMutableAttributedString(string: code, attributes: attributes)
         textView.textContainerInset = NSSize(width: 32.0, height: 32.0)
         textView.textStorage!.setAttributedString(text)

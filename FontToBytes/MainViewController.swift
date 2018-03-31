@@ -101,11 +101,11 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
 
         // Check the invert bits checkbox.
         let invertBitsChecked = ud.bool(forKey: UD_InvertBitsChecked)
-        self.invertBitsCheckbox.state = (invertBitsChecked ? NSOnState : NSOffState)
+        self.invertBitsCheckbox.state = (invertBitsChecked ? .on : .off)
         
         // Check the flip bits checkbox.
         let reverseBitsChecked = ud.bool(forKey: UD_ReverseBitsChecked)
-        self.reverseBitsCheckbox.state = (reverseBitsChecked ? NSOnState : NSOffState)
+        self.reverseBitsCheckbox.state = (reverseBitsChecked ? .on : .off)
         
         // Prepare the popup button with the outputs
         self.outputFormatSelection.removeAllItems()
@@ -124,8 +124,8 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         // Store the user defaults
         let ud = UserDefaults.standard
         ud.set(self.navigation.selectedRow-1, forKey: UD_SelectedModeIndex)
-        ud.set(self.invertBitsCheckbox.state == NSOnState, forKey: UD_InvertBitsChecked)
-        ud.set(self.reverseBitsCheckbox.state == NSOnState, forKey: UD_ReverseBitsChecked)
+        ud.set(self.invertBitsCheckbox.state == .on, forKey: UD_InvertBitsChecked)
+        ud.set(self.reverseBitsCheckbox.state == .off, forKey: UD_ReverseBitsChecked)
         ud.set(self.outputFormatSelection.indexOfSelectedItem, forKey: UD_SelectedOutputIndex)
     }
     
@@ -145,8 +145,8 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         }
         let savePanel = NSSavePanel()
         savePanel.allowedFileTypes = ["cpp", "h", "c", "txt"]
-        savePanel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: {(result: Int) in
-            if result == NSFileHandlingPanelOKButton {
+        savePanel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: {(result: NSApplication.ModalResponse) in
+            if result == .OK {
                 do {
                     try self.code.write(to: savePanel.url!, atomically: true, encoding: String.Encoding.utf8)
                 } catch let error as NSError {
@@ -172,8 +172,8 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         openPanel.canChooseDirectories = false
         openPanel.allowsMultipleSelection = false
         openPanel.allowedFileTypes = ["png"]
-        openPanel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: {(result: Int) in
-            if result == NSFileHandlingPanelOKButton {
+        openPanel.beginSheetModal(for: NSApp.mainWindow!, completionHandler: {(result: NSApplication.ModalResponse) in
+            if result == .OK {
                 let welcomeViewController = self.mainViewController as! WelcomeViewController
                 welcomeViewController.goIntoDroppedState()
                 self.convertImage(openPanel.urls[0])
@@ -200,7 +200,7 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// Displays the welcome view
     ///
     func displayWelcomeView() {
-        let newController = storyboard!.instantiateController(withIdentifier: "welcomeView") as! WelcomeViewController
+        let newController = storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "welcomeView")) as! WelcomeViewController
         newController.representedObject = self
         newController.onURLDropped = {(url: URL) in
             self.convertImage(url)
@@ -213,7 +213,7 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// Displays the result view
     ///
     func displayResultView(_ result: String) {
-        let newController = storyboard!.instantiateController(withIdentifier: "resultView") as! NSViewController
+        let newController = storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "resultView")) as! NSViewController
         newController.representedObject = result
         displayViewInMain(newController)
         displayedView = .result
@@ -223,7 +223,7 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     /// Displays the error view
     ///
     func displayErrorView(_ error: ConverterError) {
-        let newController = storyboard!.instantiateController(withIdentifier: "errorView") as! NSViewController
+        let newController = storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "errorView")) as! NSViewController
         newController.representedObject = error
         displayViewInMain(newController)
         displayedView = .error
@@ -241,10 +241,10 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         let newView = newController.view;
         newView.translatesAutoresizingMaskIntoConstraints = false
         mainView.addSubview(newView)
-        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.leading, multiplier: 1.0, constant: 0.0));
-        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.trailing, multiplier: 1.0, constant: 0.0));
-        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 0.0));
-        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0.0));
+        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mainView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: 0.0));
+        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mainView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1.0, constant: 0.0));
+        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mainView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 0.0));
+        mainView.addConstraint(NSLayoutConstraint(item: newView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mainView, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 0.0));
         self.mainViewController = newController
     }
     
@@ -266,8 +266,8 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
                     let selectedOutputIndex = self.outputFormatSelection.indexOfSelectedItem
                     let sourceCodeGeneratorItem = self.sourceCodeGenerators[selectedOutputIndex]
                     let sourceCodeOptions = SourceCodeOptions(
-                        inversion: self.invertBitsCheckbox.state == NSOnState ? .invert : .none,
-                        bitOrder: self.reverseBitsCheckbox.state == NSOnState ? .reverse : .normal)
+                        inversion: self.invertBitsCheckbox.state == .on ? .invert : .none,
+                        bitOrder: self.reverseBitsCheckbox.state == .on ? .reverse : .normal)
                     let sourceCodeGenerator = sourceCodeGeneratorItem.createGenerator(sourceCodeOptions)
                     
                     // Get the selected mode item.
@@ -387,11 +387,11 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
         }
         
         if modeItem.isSection {
-            let view = outlineView.make(withIdentifier: "HeaderCell", owner: self) as! NSTableCellView
+            let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeaderCell"), owner: self) as! NSTableCellView
             view.textField?.stringValue = modeItem.title
             return view
         } else {
-            let view = outlineView.make(withIdentifier: "DataCell", owner: self) as! NSTableCellView
+            let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DataCell"), owner: self) as! NSTableCellView
             view.textField?.stringValue = modeItem.title
             return view
         }

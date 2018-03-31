@@ -69,14 +69,14 @@ class WelcomeView: NSView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         initializeLayers()
-        register(forDraggedTypes: [NSFilenamesPboardType])
+        registerForDraggedTypes([.fileURL])
     }
 
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initializeLayers()
-        register(forDraggedTypes: [NSFilenamesPboardType])
+        registerForDraggedTypes([.fileURL])
     }
     
     
@@ -139,9 +139,9 @@ class WelcomeView: NSView {
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         let pasteBoard = sender.draggingPasteboard()
         if let types = pasteBoard.types {
-            if (types.contains(NSFilenamesPboardType)) {
-                let options: [String: Any] = [NSPasteboardURLReadingFileURLsOnlyKey: true,
-                    NSPasteboardURLReadingContentsConformToTypesKey:["public.png"]]
+            if (types.contains(.fileURL)) {
+                let options: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true,
+                                                                     .urlReadingContentsConformToTypes: ["public.png"]]
                 let classes: [AnyClass] = [NSURL.self]
                 if let fileURLs = pasteBoard.readObjects(forClasses: classes, options: options) {
                     if fileURLs.count == 1 {
@@ -155,7 +155,7 @@ class WelcomeView: NSView {
     }
     
     
-    override func draggingEnded(_ sender: NSDraggingInfo?) {
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         if !successFullDrop {
             setDropState(false)
         }
@@ -165,9 +165,9 @@ class WelcomeView: NSView {
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         let pasteBoard = sender.draggingPasteboard()
         if let types = pasteBoard.types {
-            if (types.contains(NSFilenamesPboardType)) {
-                let options: [String: Any] = [NSPasteboardURLReadingFileURLsOnlyKey: true,
-                    NSPasteboardURLReadingContentsConformToTypesKey:["public.png"]]
+            if (types.contains(.fileURL)) {
+                let options: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true,
+                                                                     .urlReadingContentsConformToTypes: ["public.png"]]
                 let classes: [AnyClass] = [NSURL.self]
                 let fileURLs = pasteBoard.readObjects(forClasses: classes, options: options)
                 self.onURLDropped!(fileURLs![0] as! URL)

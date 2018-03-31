@@ -60,8 +60,8 @@ open class StyleKit : NSObject {
         bezierPath.line(to: NSMakePoint(116, 17))
         bezierPath.curve(to: NSMakePoint(12.5, 17.39), controlPoint1: NSMakePoint(116, 17), controlPoint2: NSMakePoint(11.49, 16.52))
         bezierPath.close()
-        bezierPath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
-        bezierPath.lineJoinStyle = NSLineJoinStyle.roundLineJoinStyle
+        bezierPath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+        bezierPath.lineJoinStyle = NSBezierPath.LineJoinStyle.roundLineJoinStyle
         NSGraphicsContext.saveGraphicsState()
         defaultShadow.set()
         StyleKit.lRLightOrange.setFill()

@@ -75,9 +75,9 @@ class PrintView: NSView {
             // draw the hex number of the character
             let hexNumber = String(format: "0x%02x", arguments: [character.value])
             let hexRect = NSRect(x: boxRect.origin.x, y: boxRect.origin.y+boxRectQuadHeight, width: boxRect.size.width, height: boxRectQuadHeight)
-            let textParagraph = NSParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+            let textParagraph = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             textParagraph.alignment = .center
-            let textAttributes = [NSFontAttributeName: NSFont(name: "Helvetica Neue", size: 10.0)!, NSParagraphStyleAttributeName: textParagraph]
+            let textAttributes = [NSAttributedStringKey.font: NSFont(name: "Helvetica Neue", size: 10.0)!, NSAttributedStringKey.paragraphStyle: textParagraph]
             hexNumber.draw(in: hexRect, withAttributes: textAttributes)
             
             // Draw the character if it is printable
