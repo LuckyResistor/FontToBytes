@@ -10,12 +10,15 @@ On Success the resulting code is displayed. There you can copy the code to the c
 
 ## About the code
 
-This code is written for OS X 10.10 and newer. It is written in Swift 2 and requites Xcode 7.0 beta 6 or newer to compile.
+This code is written for OS X 10.13 and newer. It is written in Swift 4.1 and requites Xcode 9.3 or newer to compile.
 
-## Author
+## Authors
 
 Lucky Resistor
 http://luckyresistor.me
+
+Migration to Swift 4.1 and more font converters by Dominik Kapusta
+http://kapusta.cc
 
 ## License
 
