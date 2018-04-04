@@ -1,13 +1,81 @@
 //
-//  FixedConverter.swift
-//  FontToBytes
+// Lucky Resistor's Font to Byte
+// ---------------------------------------------------------------------------
+// (c)2015-2018 by Lucky Resistor.
+// (c)2018 by Dominik Kapusta.
+// See LICENSE for details.
 //
-//  Created by Dominik Kapusta on 03/04/2018.
-//  Copyright © 2018 Lucky Resistor. All rights reserved.
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 //
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+
 
 import Cocoa
 
+/// A simple converter which converts fixed-width fonts.
+///
+/// Starting from the top-left 8x8 block, it converts each block from
+/// left to right, from top to down.
+///
+/// For 'w' width and 'h' height, each w x h block is converted to the total
+/// amount of h*(Int(w/8)+1) bytes, i.e. each row is represented by Int(w/8)+1 bytes,
+/// so:
+///
+///   width | bytes
+///  ---------------
+///     5   |   1
+///     7   |   1
+///     8   |   1
+///    12   |   2
+///    16   |   2
+///    19   |   3
+///
+/// The left bit is the highest bit, and the first byte in a row is a leftmost byte.
+/// Unused trailing bits are zeroed.
+/// Example:
+/// 'A' (17 pixels wide)
+/// ...######........ -> 0x1F, 0x80, 0x00
+/// ...#######....... -> 0x1F, 0xC0, 0x00
+/// .......###....... -> 0x01, 0xC0, 0x00
+/// ......##.##...... -> 0x03, 0x60, 0x00
+/// ......##.##...... -> 0x03, 0x60, 0x00
+/// .....##...##..... -> 0x06, 0x30, 0x00
+/// .....##...##..... -> 0x06, 0x30, 0x00
+/// ....##....##..... -> 0x0C, 0x30, 0x00
+/// ....#########.... -> 0x0F, 0xF8, 0x00
+/// ...##########.... -> 0x1F, 0xF8, 0x00
+/// ...##.......##... -> 0x18, 0x0C, 0x00
+/// ..##........##... -> 0x30, 0x0C, 0x00
+/// ######...#######. -> 0xFC, 0x7F, 0x00
+/// ######...#######. -> 0xFC, 0x7F, 0x00
+/// ................. -> 0x00, 0x00, 0x00
+///
+/// This char will result in the byte sequence: 0x1F, 0x80, 0x00, 0x1F, 0xC0, 0x00, ...
+///
+/// '9' (8 pixels wide)
+/// ..XXXX.. -> 0x3C
+/// .XX..XX. -> 0x66
+/// .XX..XX. -> 0x66
+/// ..XXXXX. -> 0x3E
+/// .....XX. -> 0x06
+/// .....XX. -> 0x06
+/// .XX..XX. -> 0x66
+/// ..XXXX.. -> 0x3C
+/// ........ -> 0x00
+///
+/// This char will result in the byte sequence: 0x3c, 0x66, 0x66, ...
+///
 class FixedConverter: ModeConverter {
 
     /// The direction of the conversion
@@ -19,22 +87,22 @@ class FixedConverter: ModeConverter {
     
     /// The direction for the conversion
     ///
-    fileprivate var direction: Direction
-    fileprivate var height: Int
-    fileprivate var width: Int
+    let direction: Direction
+    let height: Int
+    let width: Int
 
     
     /// Create a new fixed 8x8 converter
+    ///
+    /// - parameters:
+    ///   - height: Font height in pixels
+    ///   - width: Font width in pixels
+    ///   - direction: Direction of the conversion
     ///
     init(height: Int, width: Int, direction: Direction) {
         self.height = height
         self.width = width
         self.direction = direction
-    }
-    
-    private struct Const {
-        static let height = 16
-        static let width = 10
     }
     
     fileprivate func checkImage(_ inputImage: InputImage) throws {
@@ -65,7 +133,11 @@ class FixedConverter: ModeConverter {
             for x in 0..<(inputImage.width/width) {
                 for row in 0..<height {
                     var remainingBits = width
+                    
+                    // for width > 8, each line will be represented by more than one byte;
+                    // let's track bytes count per line here
                     var byteIndex = 0
+                    
                     while remainingBits > 0 {
                         var byte: UInt8 = 0
                         let bitCount = min(remainingBits, 8)
@@ -111,7 +183,15 @@ class FixedConverter: ModeConverter {
                 context.setFillColor(NSColor.black.cgColor)
                 for y in 0..<height {
                     for x in 0..<width {
-                        if inputImage.isPixelSet(x: cx*width+x, y: cy*height+y) {
+                        let shouldFill: Bool = {
+                            switch self.direction {
+                            case .topDown:
+                                return inputImage.isPixelSet(x: cx*width+x, y: cy*height+y)
+                            case .leftRight:
+                                return inputImage.isPixelSet(x: cx*height+x, y: cy*width+y)
+                            }
+                        }()
+                        if shouldFill {
                             context.fill(NSRect(x: x*pixelSize, y: (height-1-y)*pixelSize, width: pixelSize, height: pixelSize))
                         }
                     }
