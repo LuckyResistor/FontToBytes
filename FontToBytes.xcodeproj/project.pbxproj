@@ -226,7 +226,7 @@
 				TargetAttributes = {
 					F61B6D0C1B93241500E5159D = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 3874754Z47;
+						DevelopmentTeam = YMXNPP3TK2;
 						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -445,7 +445,7 @@
 				CODE_SIGN_ENTITLEMENTS = FontToBytes/FontToBytes.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3874754Z47;
+				DEVELOPMENT_TEAM = YMXNPP3TK2;
 				INFOPLIST_FILE = FontToBytes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.luckyresistor.FontToBytes;
@@ -463,7 +463,7 @@
 				CODE_SIGN_ENTITLEMENTS = FontToBytes/FontToBytes.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3874754Z47;
+				DEVELOPMENT_TEAM = YMXNPP3TK2;
 				INFOPLIST_FILE = FontToBytes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.luckyresistor.FontToBytes;
