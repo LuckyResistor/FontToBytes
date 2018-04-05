@@ -1,7 +1,7 @@
 //
 // Lucky Resistor's Font to Byte
 // ---------------------------------------------------------------------------
-// (c)2015 by Lucky Resistor. See LICENSE for details.
+// (c)2015-2018 by Lucky Resistor. See LICENSE for details.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
