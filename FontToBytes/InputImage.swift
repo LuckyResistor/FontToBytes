@@ -36,7 +36,7 @@ protocol InputImage {
     
     /// Check if a given pixel is set in the image.
     ///
-    func isPixelSet(x x: Int, y: Int) -> Bool
+    func isPixelSet(x: Int, y: Int) -> Bool
     
 }
 
@@ -47,18 +47,18 @@ class InputImageFromNSImage: InputImage {
 
     /// The internal image representation.
     ///
-    private var bitmapImage: NSBitmapImageRep? = nil;
+    fileprivate var bitmapImage: NSBitmapImageRep? = nil;
 
     /// Create a new instance from the given image.
     ///
     /// - Parameter image: The image to use.
     ///
     init(image: NSImage) throws {
-        if image.TIFFRepresentation == nil {
+        if image.tiffRepresentation == nil {
             throw ConverterError(summary: "The current image can not be converted into the required format.",
-                details: "Please use a RGB or RGBA image in PNG format for the best results.");
+                details: "Please use a RGB or RGBA image in PNG format for the best results.")
         }
-        bitmapImage = NSBitmapImageRep(data: image.TIFFRepresentation!)!;
+        bitmapImage = NSBitmapImageRep(data: image.tiffRepresentation!)!;
     }
 
     // Implement the protocol
@@ -75,11 +75,11 @@ class InputImageFromNSImage: InputImage {
         }
     }
     
-    func isPixelSet(x x: Int, y: Int) -> Bool {
+    func isPixelSet(x: Int, y: Int) -> Bool {
         if x < 0 || x > self.width || y < 0 || y > self.height {
             return false
         }
-        if let color = bitmapImage!.colorAtX(x, y: y) {
+        if let color = bitmapImage!.colorAt(x: x, y: y) {
             if color.alphaComponent < 1.0 {
                 return false
             }

@@ -24,7 +24,7 @@ import Foundation
 
 /// A error from the converter
 ///
-class ConverterError: ErrorType {
+class ConverterError: Error {
 
     /// A short summary for the title.
     ///

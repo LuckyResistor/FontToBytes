@@ -29,54 +29,54 @@ class WelcomeView: NSView {
 
     /// A closure which is called if a URL is dropped on the welcome screen.
     ///
-    var onURLDropped: ((url: NSURL)->())? = nil
+    var onURLDropped: ((_ url: URL)->())? = nil
     
     /// The main layer of this view
     ///
-    private var mainLayer = CALayer()
+    fileprivate var mainLayer = CALayer()
     
     /// The displayed drop border.
     ///
-    private var borderLayer = CAShapeLayer()
+    fileprivate var borderLayer = CAShapeLayer()
     
     /// The text inside of the drop border.
     ///
-    private var textLayer = CATextLayer()
+    fileprivate var textLayer = CATextLayer()
     
     
     /// The background color in normal state.
     ///
-    private let backgroundColorNormal = StyleKit.lRWhite
+    fileprivate let backgroundColorNormal = StyleKit.lRWhite
     
     /// The foreground color in normal state.
     ///
-    private let foregroundColorNormal = StyleKit.lRGray1
+    fileprivate let foregroundColorNormal = StyleKit.lRGray1
     
     /// The background color in drag state.
     ///
-    private let backgroundColorDrag = StyleKit.lRBlue
+    fileprivate let backgroundColorDrag = StyleKit.lRBlue
     
     /// The foreground color in drag state.
     ///
-    private let foregroundColorDrag = StyleKit.lRWhite
+    fileprivate let foregroundColorDrag = StyleKit.lRWhite
     
     
     /// If a file was successfully dropped.
     ///
-    private var successFullDrop: Bool = false
+    fileprivate var successFullDrop: Bool = false
 
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         initializeLayers()
-        registerForDraggedTypes([NSFilenamesPboardType])
+        registerForDraggedTypes([.fileURL])
     }
 
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initializeLayers()
-        registerForDraggedTypes([NSFilenamesPboardType])
+        registerForDraggedTypes([.fileURL])
     }
     
     
@@ -87,40 +87,40 @@ class WelcomeView: NSView {
         self.layer = mainLayer
         self.wantsLayer = true
         mainLayer.layoutManager = CAConstraintLayoutManager()
-        mainLayer.backgroundColor = backgroundColorNormal.CGColor
+        mainLayer.backgroundColor = backgroundColorNormal.cgColor
         
         // Setup the border
         mainLayer.addSublayer(borderLayer)
-        borderLayer.addConstraint(CAConstraint(attribute: .MidX, relativeTo: "superlayer", attribute: .MidX))
-        borderLayer.addConstraint(CAConstraint(attribute: .MidY, relativeTo: "superlayer", attribute: .MidY))
+        borderLayer.addConstraint(CAConstraint(attribute: .midX, relativeTo: "superlayer", attribute: .midX))
+        borderLayer.addConstraint(CAConstraint(attribute: .midY, relativeTo: "superlayer", attribute: .midY))
         borderLayer.frame = CGRect(x: 0.0, y: 0.0, width: 380.0, height: 280.0)
         let borderRadius: CGFloat = 40.0
         let borderLineWidth: CGFloat = 20.0
-        let innerRect = CGRectInset(borderLayer.bounds, borderLineWidth+2.0, borderLineWidth+2.0)
+        let innerRect = borderLayer.bounds.insetBy(dx: borderLineWidth+2.0, dy: borderLineWidth+2.0)
         let path = NSBezierPath(roundedRect: innerRect, xRadius: borderRadius, yRadius: borderRadius)
-        borderLayer.path = path.newCGPath()
+        borderLayer.path = path.CGPath
         borderLayer.fillColor = nil
         borderLayer.lineWidth = 10.0
         borderLayer.lineDashPhase = 20.0
         borderLayer.lineDashPattern = [20.0, 10.0]
-        borderLayer.strokeColor = foregroundColorNormal.CGColor
+        borderLayer.strokeColor = foregroundColorNormal.cgColor
         borderLayer.actions = ["position": NSNull(), "bounds": NSNull()]
         
         // Setup the text
         mainLayer.addSublayer(textLayer)
-        textLayer.addConstraint(CAConstraint(attribute: .MidX, relativeTo: "superlayer", attribute: .MidX))
-        textLayer.addConstraint(CAConstraint(attribute: .MidY, relativeTo: "superlayer", attribute: .MidY))
+        textLayer.addConstraint(CAConstraint(attribute: .midX, relativeTo: "superlayer", attribute: .midX))
+        textLayer.addConstraint(CAConstraint(attribute: .midY, relativeTo: "superlayer", attribute: .midY))
         textLayer.string = NSLocalizedString("Drop your\nPNG file here!", comment: "Message to drop PNG files.")
         textLayer.alignmentMode = kCAAlignmentCenter
         textLayer.actions = ["position": NSNull(), "bounds": NSNull()]
-        textLayer.font = NSFont.boldSystemFontOfSize(50.0)
-        textLayer.foregroundColor = foregroundColorNormal.CGColor
+        textLayer.font = NSFont.boldSystemFont(ofSize: 50.0)
+        textLayer.foregroundColor = foregroundColorNormal.cgColor
     }
     
     
     /// Switch the colors to visualize the two drop states.
     ///
-    func setDropState(cursorInside: Bool) {
+    func setDropState(_ cursorInside: Bool) {
         let newForegroundColor: NSColor
         let newBackgroundColor: NSColor
         if cursorInside {
@@ -130,47 +130,47 @@ class WelcomeView: NSView {
             newForegroundColor = foregroundColorNormal
             newBackgroundColor = backgroundColorNormal
         }
-        borderLayer.strokeColor = newForegroundColor.CGColor
-        textLayer.foregroundColor = newForegroundColor.CGColor
-        mainLayer.backgroundColor = newBackgroundColor.CGColor
+        borderLayer.strokeColor = newForegroundColor.cgColor
+        textLayer.foregroundColor = newForegroundColor.cgColor
+        mainLayer.backgroundColor = newBackgroundColor.cgColor
     }
     
     
-    override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         let pasteBoard = sender.draggingPasteboard()
         if let types = pasteBoard.types {
-            if (types.contains(NSFilenamesPboardType)) {
-                let options: [String: AnyObject] = [NSPasteboardURLReadingFileURLsOnlyKey: true,
-                    NSPasteboardURLReadingContentsConformToTypesKey:["public.png"]]
+            if (types.contains(.fileURL)) {
+                let options: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true,
+                                                                     .urlReadingContentsConformToTypes: ["public.png"]]
                 let classes: [AnyClass] = [NSURL.self]
-                if let fileURLs = pasteBoard.readObjectsForClasses(classes, options: options) {
+                if let fileURLs = pasteBoard.readObjects(forClasses: classes, options: options) {
                     if fileURLs.count == 1 {
                         setDropState(true)
-                        return .Copy
+                        return .copy
                     }
                 }
             }
         }
-        return .None
+        return NSDragOperation()
     }
     
     
-    override func draggingEnded(sender: NSDraggingInfo?) {
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         if !successFullDrop {
             setDropState(false)
         }
     }
     
     
-    override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         let pasteBoard = sender.draggingPasteboard()
         if let types = pasteBoard.types {
-            if (types.contains(NSFilenamesPboardType)) {
-                let options: [String: AnyObject] = [NSPasteboardURLReadingFileURLsOnlyKey: true,
-                    NSPasteboardURLReadingContentsConformToTypesKey:["public.png"]]
+            if (types.contains(.fileURL)) {
+                let options: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true,
+                                                                     .urlReadingContentsConformToTypes: ["public.png"]]
                 let classes: [AnyClass] = [NSURL.self]
-                let fileURLs = pasteBoard.readObjectsForClasses(classes, options: options)
-                self.onURLDropped!(url: fileURLs![0] as! NSURL)
+                let fileURLs = pasteBoard.readObjects(forClasses: classes, options: options)
+                self.onURLDropped!(fileURLs![0] as! URL)
                 self.successFullDrop = true
                 goIntoDroppedState()
             }
@@ -181,13 +181,13 @@ class WelcomeView: NSView {
     
     func goIntoDroppedState() {
         // background for progress indicator
-        self.mainLayer.backgroundColor = StyleKit.lRWhite.CGColor
-        self.borderLayer.hidden = true
-        self.textLayer.hidden = true
+        self.mainLayer.backgroundColor = StyleKit.lRWhite.cgColor
+        self.borderLayer.isHidden = true
+        self.textLayer.isHidden = true
     }
 
     
-    override func draggingExited(sender: NSDraggingInfo?) {
+    override func draggingExited(_ sender: NSDraggingInfo?) {
         if !successFullDrop {
             setDropState(false)
         }

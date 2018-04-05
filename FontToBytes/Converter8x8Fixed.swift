@@ -48,13 +48,13 @@ class Converter8x8Fixed: ModeConverter {
     /// The direction of the conversion
     ///
     enum Direction {
-        case TopDown ///< Each character from top to bottom.
-        case LeftRight ///< Each character from left to right.
+        case topDown ///< Each character from top to bottom.
+        case leftRight ///< Each character from left to right.
     }
     
     /// The direction for the conversion
     ///
-    private var direction: Direction
+    fileprivate var direction: Direction
     
     
     /// Create a new fixed 8x8 converter
@@ -64,7 +64,7 @@ class Converter8x8Fixed: ModeConverter {
     }
     
     
-    private func checkImage(inputImage: InputImage) throws {
+    fileprivate func checkImage(_ inputImage: InputImage) throws {
         guard inputImage.height >= 8 else {
             throw ConverterError(summary: "Image Too Small", details: "The height of the image has to be minimum 8 pixel.")
         }
@@ -82,7 +82,7 @@ class Converter8x8Fixed: ModeConverter {
         }
     }
     
-    func convertImage(inputImage: InputImage, byteWriter: ByteWriter) throws {
+    func convertImage(_ inputImage: InputImage, byteWriter: ByteWriter) throws {
         try checkImage(inputImage);
         
         byteWriter.begin()
@@ -95,11 +95,11 @@ class Converter8x8Fixed: ModeConverter {
                     for bit in 0...7 {
                         byte <<= 1
                         switch self.direction {
-                        case .TopDown:
+                        case .topDown:
                             if inputImage.isPixelSet(x: x*8+bit, y: y*8+row) {
                                 byte |= 1
                             }
-                        case .LeftRight:
+                        case .leftRight:
                             if inputImage.isPixelSet(x: x*8+row, y: y*8+bit) {
                                 byte |= 1
                             }
@@ -108,14 +108,14 @@ class Converter8x8Fixed: ModeConverter {
                     byteWriter.writeByte(byte)
                 }
                 byteWriter.addComment(String(format: "Character 0x%02x (%d)", arguments: [characterCount, characterCount]))
-                characterCount++
+                characterCount += 1
             }
         }
         byteWriter.endArray()
         byteWriter.end()
     }
  
-    func createCharacterImages(inputImage: InputImage) throws -> [UnicodeScalar: NSImage] {
+    func createCharacterImages(_ inputImage: InputImage) throws -> [UnicodeScalar: NSImage] {
         try checkImage(inputImage);
         
         var result = [UnicodeScalar: NSImage]()
@@ -123,23 +123,23 @@ class Converter8x8Fixed: ModeConverter {
         for cy in 0..<(inputImage.height/8) {
             for cx in 0..<(inputImage.width/8) {
                 let pixelSize = 64
-                let characterImage = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 8*pixelSize, pixelsHigh: 8*pixelSize, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSCalibratedRGBColorSpace, bytesPerRow: 0, bitsPerPixel: 0)!
+                let characterImage = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 8*pixelSize, pixelsHigh: 8*pixelSize, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSColorSpaceName.calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0)!
                 let gc = NSGraphicsContext(bitmapImageRep: characterImage)!
-                let context = gc.CGContext
-                CGContextSetFillColorWithColor(context, NSColor.whiteColor().CGColor)
-                CGContextFillRect(context, NSRect(x: 0.0, y: 0.0, width: 8.0*CGFloat(pixelSize), height: 8.0*CGFloat(pixelSize)))
-                CGContextSetFillColorWithColor(context, NSColor.blackColor().CGColor)
+                let context = gc.cgContext
+                context.setFillColor(NSColor.white.cgColor)
+                context.fill(NSRect(x: 0.0, y: 0.0, width: 8.0*CGFloat(pixelSize), height: 8.0*CGFloat(pixelSize)))
+                context.setFillColor(NSColor.black.cgColor)
                 for y in 0...7 {
                     for x in 0...7 {
                         if inputImage.isPixelSet(x: cx*8+x, y: cy*8+y) {
-                            CGContextFillRect(context, NSRect(x: x*pixelSize, y: (7-y)*pixelSize, width: pixelSize, height: pixelSize))
+                            context.fill(NSRect(x: x*pixelSize, y: (7-y)*pixelSize, width: pixelSize, height: pixelSize))
                         }
                     }
                 }
                 let image = NSImage(size: NSSize(width: 8.0*CGFloat(pixelSize), height: 8.0*CGFloat(pixelSize)))
                 image.addRepresentation(characterImage)
-                result[UnicodeScalar(characterIndex+0x20)] = image
-                characterIndex++
+                result[UnicodeScalar(characterIndex+0x20)!] = image
+                characterIndex += 1
             }
         }
         return result;

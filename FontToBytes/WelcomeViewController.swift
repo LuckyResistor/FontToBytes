@@ -26,7 +26,7 @@ class WelcomeViewController: NSViewController {
 
     /// The closure which is called if an URL is dropped onto the welcome screen
     ///
-    var onURLDropped: ((url: NSURL)->())? = nil
+    var onURLDropped: ((_ url: URL)->())? = nil
     
     /// The progress indicator.
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
@@ -46,9 +46,9 @@ class WelcomeViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let welcomeView = self.view as! WelcomeView
-        welcomeView.onURLDropped = {(url: NSURL) in
+        welcomeView.onURLDropped = {(url: URL) in
             self.progressIndicator.startAnimation(self)
-            self.onURLDropped!(url: url)
+            self.onURLDropped!(url)
         }
     }
     

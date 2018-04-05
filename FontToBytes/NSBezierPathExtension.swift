@@ -22,35 +22,21 @@
 import Cocoa
 
 
-extension NSBezierPath {
+public extension NSBezierPath {
     
-    func newCGPath() -> CGPath! {
-        
-        if (self.elementCount == 0) {
-            return nil
-        }
-        let path: CGMutablePath = CGPathCreateMutable()
-        var points = [NSPoint](count: 3, repeatedValue: NSZeroPoint)
-        var didClosePath = false
-        for i in 0..<self.elementCount {
-            switch (self.elementAtIndex(i, associatedPoints: &points)) {
-            case .MoveToBezierPathElement:
-                CGPathMoveToPoint(path, nil, points[0].x, points[0].y)
-            case .LineToBezierPathElement:
-                CGPathAddLineToPoint(path, nil, points[0].x, points[0].y);
-                didClosePath = false
-            case .CurveToBezierPathElement:
-                CGPathAddCurveToPoint(path, nil, points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y);
-                didClosePath = false;
-            case .ClosePathBezierPathElement:
-                CGPathCloseSubpath(path)
-                didClosePath = true
+    public var CGPath: CGPath {
+        let path = CGMutablePath()
+        var points = [CGPoint](repeating: .zero, count: 3)
+        for i in 0 ..< self.elementCount {
+            let type = self.element(at: i, associatedPoints: &points)
+            switch type {
+            case .moveToBezierPathElement: path.move(to: points[0])
+            case .lineToBezierPathElement: path.addLine(to: points[0])
+            case .curveToBezierPathElement: path.addCurve(to: points[2], control1: points[0], control2: points[1])
+            case .closePathBezierPathElement: path.closeSubpath()
             }
         }
-        if !didClosePath {
-            CGPathCloseSubpath(path)
-        }
-        return CGPathCreateCopy(path)
+        return path
     }
-
+    
 }

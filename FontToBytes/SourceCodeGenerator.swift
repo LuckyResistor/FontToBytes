@@ -29,15 +29,15 @@ struct SourceCodeOptions {
     /// Flag if the bits shall be inverted.
     ///
     enum Inversion {
-        case None
-        case Invert
+        case none
+        case invert
     }
     
     /// The bit order for the source generator
     ///
     enum BitOrder {
-        case Normal
-        case Reverse
+        case normal
+        case reverse
     }
     
     /// If the bits shall be inverted
@@ -72,7 +72,7 @@ protocol SourceCodeGeneratorItem {
     
     /// Create a new generator
     ///
-    func createGenerator(options: SourceCodeOptions) -> SourceCodeGenerator
+    func createGenerator(_ options: SourceCodeOptions) -> SourceCodeGenerator
     
 }
 
@@ -93,7 +93,7 @@ class SourceCodeGeneratorItemImpl<GeneratorType: SourceCodeGenerator>: SourceCod
     
     /// Create a new source code generator from this item.
     ///
-    func createGenerator(options: SourceCodeOptions) -> SourceCodeGenerator {
+    func createGenerator(_ options: SourceCodeOptions) -> SourceCodeGenerator {
         return GeneratorType(options: options)
     }
     
@@ -110,7 +110,7 @@ class CommonSourceGenerator: SourceCodeGenerator {
     
     /// The source code options.
     ///
-    private let options: SourceCodeOptions
+    fileprivate let options: SourceCodeOptions
     
     /// Create a new generator instance.
     ///
@@ -119,19 +119,20 @@ class CommonSourceGenerator: SourceCodeGenerator {
     }
     
     func begin() {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .MediumStyle
-        dateFormatter.dateStyle = .MediumStyle
-        let dateTime = dateFormatter.stringFromDate(NSDate())
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .medium
+        dateFormatter.dateStyle = .medium
+        let dateTime = dateFormatter.string(from: Date())
         sourceCode = "//\n// Font Data\n// Created: \(dateTime)\n//\n"
     }
 
-    func beginArray(name: String) {
+    func beginArray(_ name: String) {
         sourceCode += "\n\nconst unsigned char \(name)[] = {\n\t"
     }
     
-    final func writeByte(var byte: UInt8) {
-        if options.bitOrder == .Reverse {
+    final func writeByte(_ byte: UInt8) {
+        var byte = byte
+        if options.bitOrder == .reverse {
             var reversedByte: UInt8 = 0
             for i: UInt8 in 0...7 {
                 if (byte & (1<<i)) != 0 {
@@ -141,17 +142,17 @@ class CommonSourceGenerator: SourceCodeGenerator {
             }
             byte = reversedByte;
         }
-        if options.inversion == .Invert {
+        if options.inversion == .invert {
             byte = ~byte
         }
         writeFinalByte(byte)
     }
     
-    func writeFinalByte(byte: UInt8) {
+    func writeFinalByte(_ byte: UInt8) {
         sourceCode += String(format: "0x%02x,", byte)
     }
     
-    func addComment(comment: String) {
+    func addComment(_ comment: String) {
         sourceCode += " // \(comment)\n\t"
     }
     
@@ -175,14 +176,14 @@ class CommonSourceGenerator: SourceCodeGenerator {
 class ArduinoSourceGenerator: CommonSourceGenerator {
     
     override func begin() {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .MediumStyle
-        dateFormatter.dateStyle = .MediumStyle
-        let dateTime = dateFormatter.stringFromDate(NSDate())
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .medium
+        dateFormatter.dateStyle = .medium
+        let dateTime = dateFormatter.string(from: Date())
         sourceCode = "//\n// Font Data\n// Created: \(dateTime)\n//\n\n#include <Arduino.h>\n"
     }
     
-    override func beginArray(name: String) {
+    override func beginArray(_ name: String) {
         sourceCode += "\n\nconst uint8_t \(name)[] PROGMEM = {\n\t"
     }
 }

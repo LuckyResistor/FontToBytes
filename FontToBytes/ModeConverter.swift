@@ -33,13 +33,13 @@ protocol ModeConverter {
     ///   - byteWriter: The interface to output the converted bytes.
     /// - throws: Throws an error on any problem while conversion or with the input image.
     ///
-    func convertImage(inputImage: InputImage, byteWriter: ByteWriter) throws -> Void
+    func convertImage(_ inputImage: InputImage, byteWriter: ByteWriter) throws -> Void
     
     /// Create a character map from the input image.
     ///
     /// - parameter inputImage: The input image to use for the character images.
     /// - returns: A map with all characters to create a chart.
     ///
-    func createCharacterImages(inputImage: InputImage) throws -> [UnicodeScalar: NSImage]
+    func createCharacterImages(_ inputImage: InputImage) throws -> [UnicodeScalar: NSImage]
 }
 

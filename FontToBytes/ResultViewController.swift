@@ -37,16 +37,16 @@ class ResultViewController: NSViewController {
         let code = self.representedObject as! String
         var font = NSFont(name: "Menlo", size: 12.0)
         if font == nil {
-            font = NSFont.systemFontOfSize(12.0)
+            font = NSFont.systemFont(ofSize: 12.0)
         }
-        let attributes: [String: AnyObject] = [NSFontAttributeName: font!]
+        let attributes: [NSAttributedStringKey: Any] = [.font: font!]
         let text = NSMutableAttributedString(string: code, attributes: attributes)
         textView.textContainerInset = NSSize(width: 32.0, height: 32.0)
         textView.textStorage!.setAttributedString(text)
     }
     
     
-    @IBAction func copyToPasteboard(sender: AnyObject) {
+    @IBAction func copyToPasteboard(_ sender: Any) {
         textView.selectAll(self)
         textView.copy(self)
     }

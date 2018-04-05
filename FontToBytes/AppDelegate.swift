@@ -33,19 +33,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var mainWindowController: MainWindowController? = nil
     
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
 
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
 
     /// Reopen the main window if the user clicks on the application icon in the dock.
     ///
-    func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         mainWindowController?.window?.makeKeyAndOrderFront(self)
         return false
     }

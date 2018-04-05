@@ -51,11 +51,11 @@ class PrintView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
         
         var cx = 0
         var cy = 0
-        for character in characterMap.keys.sort() {
+        for character in characterMap.keys.sorted() {
             
             // draw the box
             let boxRect = NSRect(x: boxSize.width*CGFloat(cx) + marginSize.width,
@@ -64,43 +64,39 @@ class PrintView: NSView {
             let boxRectQuadHeight = boxRect.height/4.0
             let box = NSBezierPath(rect: boxRect)
             box.lineWidth = 1.0
-            NSColor.blackColor().setStroke()
+            NSColor.black.setStroke()
             box.stroke()
             
             // draw the bitmap in the box
             let image = characterMap[character]!
             let imageRect = NSRect(x: boxRect.origin.x, y: boxRect.origin.y+2.0*boxRectQuadHeight, width: boxRect.size.width, height: 2.0*boxRectQuadHeight)
-            image.drawInRect(NSInsetRect(imageRect, 2.0, 2.0), fromRect: NSZeroRect, operation: .CompositeCopy, fraction: 1.0)
+            image.draw(in: NSInsetRect(imageRect, 2.0, 2.0), from: NSZeroRect, operation: .copy, fraction: 1.0)
             
             // draw the hex number of the character
             let hexNumber = String(format: "0x%02x", arguments: [character.value])
             let hexRect = NSRect(x: boxRect.origin.x, y: boxRect.origin.y+boxRectQuadHeight, width: boxRect.size.width, height: boxRectQuadHeight)
-            let textParagraph = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-            textParagraph.alignment = .Center
-            let textAttributes = [NSFontAttributeName: NSFont(name: "Helvetica Neue", size: 10.0)!, NSParagraphStyleAttributeName: textParagraph]
-            hexNumber.drawInRect(hexRect, withAttributes: textAttributes)
+            let textParagraph = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+            textParagraph.alignment = .center
+            let textAttributes = [NSAttributedStringKey.font: NSFont(name: "Helvetica Neue", size: 10.0)!, NSAttributedStringKey.paragraphStyle: textParagraph]
+            hexNumber.draw(in: hexRect, withAttributes: textAttributes)
             
             // Draw the character if it is printable
-            if character.isASCII() {
+            if character.isASCII {
                 let printableCharacter = String(Character(character))
                 let printableRect = NSRect(x: boxRect.origin.x, y: boxRect.origin.y, width: boxRect.size.width, height: boxRectQuadHeight)
-                printableCharacter.drawInRect(printableRect, withAttributes: textAttributes)
+                printableCharacter.draw(in: printableRect, withAttributes: textAttributes)
             }
             
-            if (++cx >= columnCount) {
+            cx += 1
+            
+            if (cx >= columnCount) {
                 cx = 0
-                ++cy
+                cy += 1
             }
         }
     }
     
-    override func knowsPageRange(range: NSRangePointer) -> Bool {
-        range.memory.location = 1
-        range.memory.length = 1
-        return true
-    }
-    
-    override func rectForPage(page: Int) -> NSRect {
+    override func rectForPage(_ page: Int) -> NSRect {
         return pageRect
     }
     
