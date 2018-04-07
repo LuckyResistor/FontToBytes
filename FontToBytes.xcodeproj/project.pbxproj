@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		374489C22073A16A00BD64E9 /* FixedConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374489C12073A16A00BD64E9 /* FixedConverter.swift */; };
 		3757661B206FDA6700624927 /* PrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757661A206FDA6700624927 /* PrintView.swift */; };
 		F61B6D131B93241500E5159D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D121B93241500E5159D /* AppDelegate.swift */; };
 		F61B6D151B93241500E5159D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D141B93241500E5159D /* MainViewController.swift */; };
@@ -15,7 +16,6 @@
 		F61B6D261B93241500E5159D /* FontToBytesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D251B93241500E5159D /* FontToBytesTests.swift */; };
 		F61B6D301B932F2A00E5159D /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D2F1B932F2A00E5159D /* MainWindowController.swift */; };
 		F61B6D321B93449000E5159D /* ModeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D311B93449000E5159D /* ModeItem.swift */; };
-		F61B6D341B93AA7200E5159D /* Converter8x8Fixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */; };
 		F6590FFF1B9879B300A77DBA /* NSBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6590FFE1B9879B300A77DBA /* NSBezierPathExtension.swift */; };
 		F65910011B98938C00A77DBA /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65910001B98938C00A77DBA /* StyleKit.swift */; };
 		F65910031B98B38500A77DBA /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65910021B98B38500A77DBA /* ResultViewController.swift */; };
@@ -41,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		374489C12073A16A00BD64E9 /* FixedConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedConverter.swift; sourceTree = "<group>"; };
 		3757661A206FDA6700624927 /* PrintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintView.swift; sourceTree = "<group>"; };
 		F61B6D0D1B93241500E5159D /* Font to Bytes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Font to Bytes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61B6D111B93241500E5159D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		F61B6D251B93241500E5159D /* FontToBytesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontToBytesTests.swift; sourceTree = "<group>"; };
 		F61B6D2F1B932F2A00E5159D /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		F61B6D311B93449000E5159D /* ModeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeItem.swift; sourceTree = "<group>"; };
-		F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converter8x8Fixed.swift; sourceTree = "<group>"; };
 		F6590FFE1B9879B300A77DBA /* NSBezierPathExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBezierPathExtension.swift; sourceTree = "<group>"; };
 		F65910001B98938C00A77DBA /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		F65910021B98B38500A77DBA /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		F65A09A61B9645A600260BB2 /* Converter */ = {
 			isa = PBXGroup;
 			children = (
-				F61B6D331B93AA7200E5159D /* Converter8x8Fixed.swift */,
+				374489C12073A16A00BD64E9 /* FixedConverter.swift */,
 			);
 			name = Converter;
 			sourceTree = "<group>";
@@ -296,11 +296,11 @@
 				F69EC3D71B97AA9C00075CFD /* WelcomeView.swift in Sources */,
 				F66BB31A1B9792F800F92DDE /* ErrorView.swift in Sources */,
 				3757661B206FDA6700624927 /* PrintView.swift in Sources */,
+				374489C22073A16A00BD64E9 /* FixedConverter.swift in Sources */,
 				F6590FFF1B9879B300A77DBA /* NSBezierPathExtension.swift in Sources */,
 				F65A09AA1B96499700260BB2 /* ByteWriter.swift in Sources */,
 				F66BB3141B978CFA00F92DDE /* ErrorViewController.swift in Sources */,
 				F61B6D301B932F2A00E5159D /* MainWindowController.swift in Sources */,
-				F61B6D341B93AA7200E5159D /* Converter8x8Fixed.swift in Sources */,
 				F69EC3D91B97AAAC00075CFD /* WelcomeViewController.swift in Sources */,
 				F66377EF1B99BABE0015E531 /* SourceCodeGenerator.swift in Sources */,
 			);

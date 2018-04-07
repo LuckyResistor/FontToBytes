@@ -35,8 +35,14 @@ class MainViewController: NSViewController, NSOutlineViewDataSource, NSOutlineVi
     
     /// All visible mode items.
     fileprivate var modeItems = [
-        ModeItem(title: "8×8 Fixed Top-Down", converter: Converter8x8Fixed(direction: .topDown)),
-        ModeItem(title: "8×8 Fixed Left-Right", converter: Converter8x8Fixed(direction: .leftRight))
+        ModeItem(title: "8×8 Fixed Top-Down", converter: FixedConverter(height: 8, width: 8, direction: .topDown)),
+        ModeItem(title: "8×8 Fixed Left-Right", converter: FixedConverter(height: 8, width: 8, direction: .leftRight)),
+        ModeItem(title: "12×7 Fixed Top-Down", converter: FixedConverter(height: 12, width: 7, direction: .topDown)),
+        ModeItem(title: "12×7 Fixed Left-Right", converter: FixedConverter(height: 12, width: 7, direction: .leftRight)),
+        ModeItem(title: "16×10 Fixed Top-Down", converter: FixedConverter(height: 16, width: 10, direction: .topDown)),
+        ModeItem(title: "16×10 Fixed Left-Right", converter: FixedConverter(height: 16, width: 10, direction: .leftRight)),
+        ModeItem(title: "16×11 Fixed Top-Down", converter: FixedConverter(height: 16, width: 11, direction: .topDown)),
+        ModeItem(title: "16×11 Fixed Left-Right", converter: FixedConverter(height: 16, width: 11, direction: .leftRight))
     ]
     
     fileprivate var sourceCodeGenerators: [SourceCodeGeneratorItem] = [
